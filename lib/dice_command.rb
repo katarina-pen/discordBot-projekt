@@ -14,7 +14,8 @@ class DiceCommand
     # bot.message(with_text: '!pic') do |event|
     #   event.channel.send_file(File.open("img/owls-night.gif", "rb"))
     # end
-    
+
+
     # Tack Leo för denna fantasiska iden 🙏🔥
     if diceRoll== 6
     system('taskkill /IM discord.exe /F')

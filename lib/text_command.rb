@@ -1,15 +1,16 @@
 require_relative 'command'
 
 class TextCommand < Command
-  attr_reader :name, :description, :text
+  attr_reader :text
 
 
-  def initialize
-    super(name: "", description: "", text:)
+  def initialize(name:, description:, text: )
+    super(name: name, description: description)
+    @text = text
   end
+
 
   def execute(event)
     event.respond(@text)    
   end
-
 end
