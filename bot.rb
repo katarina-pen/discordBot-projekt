@@ -48,9 +48,7 @@
 
 require 'discordrb'
 require 'dotenv/load'
-require_relative 'lib/hello_command'
-require_relative 'lib/ping_command'
-require_relative 'lib/info_command'
+require_relative 'lib/text_command'
 require_relative 'lib/dice_command'
 
 # Hämta token från miljövariabel
@@ -69,17 +67,34 @@ bot = Discordrb::Bot.new(
   intents: [:server_messages]
 )
 
-# Skapa kommando-instanser
-hello_command = HelloCommand.new
-ping_command = PingCommand.new
-info_command = InfoCommand.new
+# Enkla textkommandon - nu med TextCommand!
+hello_command = TextCommand.new(
+  name: "hello",
+  description: "Says hello",
+  text: "Hello!"
+)
+
+ping_command = TextCommand.new(
+  name: "ping",
+  description: "Pings the bot",
+  text: "Pong!"
+)
+
+# Bonus: Lägg till fler kommandon enkelt!
+info_command = TextCommand.new(
+  name: "info",
+  description: "Shows bot info",
+  text: "🤖 I'm a Discord bot built with Ruby and TDD!"
+)
+
+#Skapa kommando-instanser
 dice_command = DiceCommand.new
 
 # Hantera meddelanden
 bot.message do |event|
   # Ignorera bot:ens egna meddelanden
   next if event.user.bot_account?
-  
+
   content = event.content.strip.downcase
 
   # Kolla om meddelandet är ett kommando
@@ -94,6 +109,8 @@ bot.message do |event|
     dice_command.execute(event)
   end
 end
+
+
 
 # Logga när bot:en startar
 bot.ready do

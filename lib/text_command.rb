@@ -13,4 +13,5 @@ class TextCommand < Command
   def execute(event)
     event.respond(@text)    
   end
+
 end
